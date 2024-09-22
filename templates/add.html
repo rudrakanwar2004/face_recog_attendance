@@ -1,0 +1,272 @@
+{% extends "index.html" %}
+
+{% block title %}Add Users{% endblock title %}
+
+{% block head %}
+
+
+{% endblock head %}
+
+
+{% block body %}
+    {% if error_message %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ error_message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+
+    {% if success %}
+        <style>
+            .success-container {
+                display: none;
+                position: fixed; /* Cover the entire viewport */
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #4CAF50; /* Dark semi-transparent background */
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                text-align: center;
+                color: white;
+            }
+
+            .checkmark {
+                width: 120px;
+                height: 120px;
+                border-radius: 50%;
+                display: block;
+                stroke-width: 5;
+                stroke: #fff;
+                stroke-miterlimit: 10;
+                margin: 5% auto;
+                box-shadow: inset 0px 0px 0px #4CAF50;
+                animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+            }
+
+            .checkmark__circle {
+                stroke-dasharray: 166;
+                stroke-dashoffset: 166;
+                stroke-width: 4;
+                stroke-miterlimit: 10;
+                stroke: #fff;
+                fill: none;
+                animation: stroke .6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+            }
+
+            .checkmark__check {
+                transform-origin: 50% 50%;
+                stroke-dasharray: 48;
+                stroke-dashoffset: 48;
+                animation: stroke .3s cubic-bezier(0.65, 0, 0.45, 1) .6s forwards;
+            }
+
+            @keyframes stroke {
+                100% {
+                    stroke-dashoffset: 0;
+                }
+            }
+
+            @keyframes scale {
+                0%, 100% {
+                    transform: none;
+                }
+                50% {
+                    transform: scale3d(1.1, 1.1, 1);
+                }
+            }
+
+            @keyframes fill {
+                100% {
+                    box-shadow: inset 0px 0px 0px 30px #4CAF50;
+                }
+            }
+
+            .success-message {
+                margin-top: 20px; /* Space between tick and message */
+                font-size: 20px; /* Larger font size */
+                font-weight: 600; /* Semi-bold text */
+                animation: fadeIn 1s ease-in-out 1s forwards;
+                opacity: 0; /* Hidden before animation */
+            }
+
+            @keyframes fadeIn {
+                100% {
+                    opacity: 1;
+                }
+            }
+        </style>
+        <div class="success-container" id="success-container" style="display: flex;">
+            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+            </svg>
+            <div class="success-message">Done Successfully</div>
+        </div>
+        <script>
+            setTimeout(function() {
+                document.getElementById('success-container').style.display = 'none';
+                window.location.href = "{% url 'add' %}";
+            }, 2000);
+        </script>
+    {% endif %}
+    <div class="col-lg-12" style="
+        background: hsla(290,60%,70%,0.3);
+        margin-top: 3em;
+        margin-bottom: 5em;
+        padding: 2em 1em;
+        color: #fff;
+        border-radius: 10px;
+        box-shadow: 2px 2px 15px 0px rgba(0, 3, 0, 0.7);">
+
+        <center><h2>Student Details Form</h2></center>
+        <div class="container mt-5">
+            <div id="alerts-container"></div>
+            <form id="studentForm" action="{% url 'add' %}" method="post"  class="needs-validation" novalidate>
+                {% csrf_token %}
+                <!-- First Name -->
+                <div class="mb-3">
+                    <label for="f_name" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="f_name" name="f_name" required pattern="^[A-Za-z]+$">
+                    <div class="invalid-feedback">
+                        First name must only contain letters and cannot include numbers or special characters.
+                    </div>
+                </div>
+
+                <!-- Last Name -->
+                <div class="mb-3">
+                    <label for="l_name" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="l_name" name="l_name" required pattern="^[A-Za-z]+$">
+                    <div class="invalid-feedback">
+                        Last name must only contain letters and cannot include numbers or special characters.
+                    </div>
+                </div>
+
+                <!-- Roll Number -->
+                <div class="mb-3">
+                    <label for="roll_no" class="form-label">Roll Number</label>
+                    <input type="text" class="form-control" id="roll_no" name="roll_no" required pattern="^\d+$">
+                    <div class="invalid-feedback">
+                        Roll number must only contain numeric values.
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid email address.
+                    </div>
+                </div>
+
+                <!-- Phone Number -->
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" id="phone" name="phone" required pattern="^\d{10}$">
+                    <div class="invalid-feedback">
+                        Phone number must be a 10-digit number without any letters or special characters.
+                    </div>
+                </div>
+
+
+                <!-- Capture Image Button -->
+                <div class="mb-3 mt-4">
+                    <center><button type="button" class="btn btn-secondary" id="captureImageBtn">Capture Image</button></center>
+                </div>
+
+                <!-- Submit Button -->
+               <center> <button type="submit" class="btn btn-primary" id="submitBtn" disabled>Submit</button></center>
+            </form>
+        </div>
+
+        <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const captureImageBtn = document.getElementById('captureImageBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const alertsContainer = document.getElementById('alerts-container');
+
+    // Disable the submit button initially
+    submitBtn.disabled = true;
+    submitBtn.dataset.imageCaptured = 'false';  // Image capture flag set to false initially
+
+    // Capture Image button click event
+    captureImageBtn.addEventListener('click', function () {
+        // Get user input values
+        const fName = document.getElementById('f_name').value;
+        const lName = document.getElementById('l_name').value;
+        const rollNo = document.getElementById('roll_no').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+
+        // Check if all fields are filled before making a validation request
+        if (fName && lName && rollNo && email && phone) {
+            // Send a request to validate the user before capturing the image
+            fetch(`/validate_user/?f_name=${encodeURIComponent(fName)}&l_name=${encodeURIComponent(lName)}&roll_no=${encodeURIComponent(rollNo)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`)
+            .then(response => response.json())
+            .then(data => {
+                alertsContainer.innerHTML = ''; // Clear any previous alerts
+
+                if (data.status === 'valid') {
+                    // If validation passes, proceed to capture the image
+                    fetch(`/capture_image/?f_name=${encodeURIComponent(fName)}&l_name=${encodeURIComponent(lName)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            submitBtn.dataset.imageCaptured = 'true';  // Set the image capture flag to true
+                            showAlert('Image Captured and Saved Successfully.', 'success');
+                            checkFormValidity();  // Check form validity to enable/disable the submit button
+                        } else {
+                            showAlert('Error Capturing Image: ' + (data.message || 'Unknown error'), 'danger');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        showAlert('An error occurred while capturing the image.', 'danger');
+                    });
+                } else {
+                    // If validation fails, show the error message
+                    showAlert(data.message, 'danger');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showAlert('An error occurred during validation.', 'danger');
+            });
+        } else {
+            showAlert('Please fill out all fields before capturing the image.', 'warning');
+        }
+    });
+
+    // Function to check if the form is valid and the image has been captured
+    const checkFormValidity = () => {
+        const form = document.getElementById('studentForm');
+        if (form.checkValidity() && submitBtn.dataset.imageCaptured === 'true') {
+            submitBtn.disabled = false;  // Enable submit button
+        } else {
+            submitBtn.disabled = true;   // Disable submit button
+        }
+    };
+
+    // Attach input event listeners to form fields to validate the form
+    document.querySelectorAll('input').forEach(input => {
+        input.addEventListener('input', checkFormValidity);
+    });
+
+    // Helper function to show alerts
+    function showAlert(message, type) {
+        const alert = document.createElement('div');
+        alert.className = `alert alert-${type} alert-dismissible fade show`;
+        alert.role = 'alert';
+        alert.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+        alertsContainer.appendChild(alert);
+    }
+});
+        </script>
+    </div>
+{% endblock body %}

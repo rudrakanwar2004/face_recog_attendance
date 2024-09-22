@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+
+{% block title %}Mark Your Attendance{% endblock title %}
+
+{% block head %}
+
+
+{% endblock head %}
+
+{% block body %}
+    <div class="c-lg-12" style="
+    background: rgba(0,0,0,0.6);
+    margin-top: 3em;
+    margin-bottom: 5em;
+    padding: 2em 1em;
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 2px 2px 15px 0px rgba(0, 3, 0, 0.7);">
+        <div class="container mt-5">
+            <div class="text-center mb-4">
+                <h2>Mark Your Attendance</h2>
+                <p>Please ensure your face is clearly visible within the frame.</p>
+            </div>
+            <center>
+            <div class="video-container">
+                <img src="{% url 'video_feed' %}" alt="Video Feed" id="video-feed" width="600" height="650">
+            </div>
+            </center>
+
+        </div>
+    </div>
+{% endblock body %}
+

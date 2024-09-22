@@ -1,0 +1,46 @@
+{% extends "index.html" %}
+
+{% block title %}Contact Us{% endblock title %}
+
+
+{% block body %}
+    <div class="container-fluid px-0">
+            <img src="\static\cs1.jpg" alt="Contact Us" width="400" height="600" class="d-block w-100 mx-0">
+    </div>
+    <div class="c-lg-12" style="
+    background: rgba(0,0,0,0.6);
+    margin-top: 3em;
+    margin-bottom: 5em;
+    padding: 2em 1em;
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 2px 2px 15px 0px rgba(0, 3, 0, 0.7);">
+        <h1 class="my-2 text-center">Contact Us :- </h1>
+        <div class="container my-5">
+            <form  method="post" action="/contact">
+                {% csrf_token %}
+                <div class="form-group my-2">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter Your Name ">
+                </div>
+
+                <div class="form-group my-2">
+                <label for="name">E-Mail Address</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your E-Mail ">
+                </div>
+
+                <div class="form-group my-2">
+                    <label for="phone">Mobile Number :- </label>
+                    <input type="phone" class="form-control" id="phone" name="phone" placeholder="Enter Your Mobile Number ">
+                </div>
+
+                <div class="form-group my-2">
+                <label for="desc">Your Complaint:-</label>
+                <textarea class="form-control" id="desc" rows="3" name="desc"></textarea>
+                </div>
+
+                <center><button class="btn btn-primary my-2" id="submit">Submit</button></center>
+            </form>
+        </div>
+    </div>
+{% endblock body %}
