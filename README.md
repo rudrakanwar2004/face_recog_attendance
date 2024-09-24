@@ -98,15 +98,14 @@ Before you begin, make sure you have the following installed:
 
 ## Screenshots
 
-Include relevant screenshots of your system to give a visual understanding of how the system works. Example:
+Here are couple of relevant screenshots of my system to give a visual understanding of how the system works. Example:
 
 1. **Homepage**:
-   ![Homepage](![image](https://github.com/user-attachments/assets/f7aa8ec2-24cf-4756-8cfb-c5e70dacfbaf)
-)
+   ![Homepage](https://github.com/user-attachments/assets/f7aa8ec2-24cf-4756-8cfb-c5e70dacfbaf)
 
 2. **Admin Dashboard**:
-   ![Admin Dashboard](![image](https://github.com/user-attachments/assets/479c9860-a1be-4b76-a164-52fcb9fa23f1)
-)
+   ![Admin Dashboard](https://github.com/user-attachments/assets/479c9860-a1be-4b76-a164-52fcb9fa23f1)
+
 
 ---
 
