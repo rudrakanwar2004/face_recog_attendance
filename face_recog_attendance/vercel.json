@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "face_recog_attendance/asgi.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "face_recog_attendance/**",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "staticfiles"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "face_recog_attendance/asgi.py"
+    }
+  ]
+}

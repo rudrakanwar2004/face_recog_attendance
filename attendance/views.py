@@ -1,5 +1,3 @@
-
-
 from django.shortcuts import render,redirect
 from attendance.models import Student, AttendanceRecord,New_Commers_Validate,Contact
 from django.contrib import messages
