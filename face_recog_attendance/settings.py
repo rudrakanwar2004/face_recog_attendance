@@ -27,9 +27,9 @@ KNOWN_FACES_DIR = os.path.join(BASE_DIR, 'known_faces')
 SECRET_KEY = "django-insecure-wx6)w_73rnk%3hg+1$$@bh$40s%nwt__r@q=vj(_*nyd(yzq86"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
